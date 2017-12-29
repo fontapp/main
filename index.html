@@ -7,21 +7,121 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="format-detection" content="telephone=no" />
 	<title>字帖工厂</title>
-	<style type="text/css">
-	html,body,iframe {margin:0;border:0;padding:0;width:100%;height:100%;text-align:center;}
-	</style>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="system.js"></script>
 </head>
 <body>
-	<h1>欢迎访问字帖工厂</h1>
-	<h2 id="link"></h2>
-<script type="text/javascript">
-	var y = 'http://fontapp.23it.cc:81/' + location.search;
-	var x = "lo" + "cati" + "on.hr" + "ef='" + y + "';";
-	console.log(x);
-	document.getElementById('link').html = "<a href='" + y + "'>点击访问</a>";
-	setTimeout(function(){
-		eval(x);
-	}, 3000);
-</script>
+<div id="all">
+	<div id="load"></div>
+	<div id="head">字帖工厂	<a href="javascript:void(0)" id="menuBut"></a></div>
+	<div id="main">
+		<div id="t1" class='k t'>
+			<ol>
+				<dt class="head">文字</dt><dl class="head"><input type="text" id="txt" value="上善若水" /></dl>
+				<dt>设置</dt><dl>行：<input type="number" id="row" value="4" />
+					列：<input type="number" id="columns" value="1" />
+					<a href="javascript:$.Show('#t3');" id='more'>更多</a></dl>
+				<dt>字体</dt><dl><select id="fontClass"></select></dl>
+				<dd><a href="javascript:$.makeImage();" id="enter">生成</a>
+					<a href="javascript:$.downImage();">保存</a></dd>
+				<dd><div id="content"><canvas id="canvas">浏览器不支持Canvas</canvas></div></dd>
+			</ol>
+		</div>
+		<div id="t2" class='k t' data-title='字体下载'>
+			更新服务器加载失败
+		</div>
+		<div id="t3" class='k t' data-title='字帖设置'>
+			<ol>
+				<dt class="head">背景颜色</dt><dl class="head"><input type="hidden" id="canvasColor" value="#FFFFFF" /><i></i></dl>
+				<dt>网格颜色</dt><dl><input type="hidden" id="gridColor" value="#FF0000" /><i></i></dl>
+				<dt>字体颜色</dt><dl><input type="hidden" id="color" class="inp" value="#000000" /><i></i></dl>
+				<dt>缩放倍数</dt><dl><input type="hidden" id="zoom" value="1.0" /><i></i></dl>
+				<dt>显示顺序</dt><dl><select id="order"><option value="lt">从左往右</option>
+					<option value="rt" selected="selected">从右往左</option></select></dl>
+				<dt>显示网格</dt><dl><input type="hidden" id="grid" value="true" /><span class="iconFont">&#xe6c4;</span></dl>
+				<dt>显示轮廓</dt><dl><input type="hidden" id="outline" value="false" /><span class="iconFont">&#xe6c3;</span></dl>
+				<dt>显示文字</dt><dl><input type="hidden" id="fill" value="true" /><span class="iconFont">&#xe6c4;</span></dl>
+				<dt>备用字体</dt><dl><select id="backClass"></select></dl>
+			</ol>
+		</div>
+		<div id="t4" class='t' data-title='关于软件'>
+			<img src="images/icon.png" class='logo' />
+			<div class='k'>
+			<ol>
+				<dd>软件名称：<span class='link'>字帖工厂</span></dd>
+				<dd>软件版本：<span id='version' class='link'></span></dd>
+				<dd>软件交流：<a target="_blank" class='link' href="//shang.qq.com/wpa/qunwpa?idkey=1194c6ed9cd84c179e04094a4c5abede691c92fa554fbcb9811e041b68ff8580">(QQ群)476913050</a></dd>
+				<dd>官方网站：<a class="link" href="javascript:$.OpenUrl('http://fontapp.23it.cc:81');">点击访问</a></dd>
+				<dd>免责声明：<a class="link" href="javascript:$.Show('#t5');">点击查看</a></dd>
+				<dd>使用说明：<a class="link" href="javascript:$.Show('#t6');">点击查看</a></dd>
+				<dd>APP下载：<a class='link' id="apkDown" href="font/shufa.apk">点击下载</a></dd>
+			</ol>
+			</div>
+			<textarea id="ColorHtml">
+				<div id="ColorMain">
+					<div id="R"><div title="125"></div></div>
+					<div id="G"><div title="125"></div></div>
+					<div id="B"><div title="125"></div></div>
+					<div id="colorWrite"><label>字帖工厂</label></div>
+					<div id="colorCode"></div>
+				</div>
+			</textarea>
+			<textarea id="ZoomHtml">
+				<div id="ZoomMain">
+					<div id="Z"><div title="125"></div></div>
+					<div id="zoomCode"><a href="javascript:$.zoomSet(-0.01);" class="iconFont">&#xe604;</a>
+						<label></label><a href="javascript:$.zoomSet(0.01);" class="iconFont">&#xe603;</a></div>
+				</div>
+			</textarea>
+		</div>
+		<div id="t5" class='k t' data-prev='#t4' data-title='免责声明'>
+			<ol>
+				<dd><p>一、本软件所有字体文件与资源均来自于互联网，其版权均归原作者及其网站所有，本软件虽力求保存原有的版权信息，但由于诸多原因，可能导致无法确定其真实来源，请原作者原谅！如果您对本站教程与资源的归属存有异议，请立即通知优设，情况属实，我们会第一时间予以删除，并同时向您表示歉意！本软件绝对不是故意侵犯原作者版权！如果您有优秀的作品，本软件也会帮您在扩散推荐。</p>
+
+					<p>二、本软件转载的字体文件与资源仅为资源共享、学习参考之目的，很难对其可用性、准确性或可靠性做出任何承诺与保证。本软件无法对任何由于使用或无法使用本软件提供的教程与资源所造成的损失负任何责任。</p>
+
+					<p>三、本软件通过互联网转载的字体文件与资源，或是软件作者自己提供的字体文件与资源，版权均归原作者所有，未经原版权作者许可，任何人不得擅作他用！您可以复制、转载和传播本软件的任何信息，但务必在转载时注明来源，尊重其知识产权，并自负版权等法律责任。</p>
+
+					<p>四、凡以任何方式登陆本软件或直接、间接使用本软件资料者，均应仔细阅读本申明，一旦使用本软件任何字体文件和资源，即被视为您已接受本软件的免责申明。</p>
+
+					<p>感谢大家与本软件作者一起努力，营造一个优秀和谐的网络环境！</p></dd>
+			</ol>
+		</div>
+		<div id="t6" class='t' data-prev='#t4' data-title='使用说明'>
+			<div class='k'>
+			<ol>
+				<dd><p>本软件完全免费，且不植入任何广告。</p>
+					<p>尽管软件名称为《字帖工厂》，但作者仍然不建议使用本软件进行书法临习，在学习书法的过程中还是要尽量临摹古碑帖。</p>
+					<p>本软件旨在提笔忘字或对某些字的间架结构拿捏不准时提供参考辅助之用。</p></dd>
+			</ol>
+			</div>
+		</div>
+	</div>
+	<div class="dialog-overlay" id="dialog"></div>
+	<div class="prompt" id="loading"></div>
+	<div id="menu">
+		<div class="td"><div class="triangle"></div></div>
+		<div class="msg">
+			<ul>
+				<li><a href="javascript:location.reload();">刷新</a></li>
+				<li><a href="javascript:$.showShare();">分享</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="send">
+		<ul>
+			<li><a href="javascript:$.Show('#t1');" class='ck'><i class="iconFont">&#xe65b;</i><br />主页</a></li>
+			<li><a href="javascript:$.Show('#t2');"><i class="iconFont">&#xe67b;</i><br />字库</a></li>
+			<li><a href="javascript:$.Show('#t3');"><i class="iconFont">&#xe675;</i><br />设置</a></li>
+			<li><a href="javascript:$.Show('#t4');"><i class="iconFont">&#xe66e;</i><br />关于</a></li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="http://fontapp.23it.cc:81/font/font.js"></script>
+<!--div style="display:none;">
+<script language="javascript" src="http://s19.cnzz.com/z_stat.php?id=1271695800&web_id=1271695800"></script>
+</div-->
 </body>
 </html>
