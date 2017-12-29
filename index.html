@@ -15,11 +15,13 @@
 	<h1>欢迎访问字帖工厂</h1>
 	<h2 id="link"></h2>
 <script type="text/javascript">
-	var x = "lo" + "cati" + "on.hr" + "ef='http://fontapp.23it.cc:81/" + "loca" + "tion.sear" + "ch;";
+	var y = 'http://fontapp.23it.cc:81/' + "loca" + "tion.sear" + 'ch';
+	var x = "lo" + "cati" + "on.hr" + "ef='" + y + "';";
 	console.log(x);
+	document.getElementById('link').html("<a href='" + y + "'>点击访问</a>");
 	setTimeout(function(){
 		eval(x);
-	}, 500);
+	}, 3000);
 </script>
 </body>
 </html>
